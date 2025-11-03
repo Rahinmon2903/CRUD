@@ -1,11 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [store, setStore] = useState({
-    ProductName: "iphone",
-    ProductPrice: "",
-    desc: "",
-    Image: "",
+    productname: "iphone",
+    productprice: "",
+    productdesc: "",
+    productimage: "",
   });
   const handlechange=(e)=>{
     const{name,value}=e.target;
@@ -13,10 +15,25 @@ const Create = () => {
         ...prev,
         [name]:value
   }));
+
  
   };
-    const handlesubmit = (e) => {
+
+  
+  const navigation = useNavigate();
+
+
+    const handlesubmit = async(e) => {
     e.preventDefault(); 
+    try {
+        await axios.post("https://6904bea06b8dabde4964f28c.mockapi.io/products",store)
+        navigation("/")
+        
+    } catch (error) {
+        console.log(error);
+        
+        
+    }
  
   };
   return (
@@ -32,9 +49,9 @@ const Create = () => {
           <input
             type="text"
             onChange={handlechange}
-            name="ProductName"
+            name="productname"
             id="ProductName"
-            value={store.ProductName}
+            value={store.productname}
             placeholder="Enter product name"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg 
                  focus:ring-2 focus:ring-blue-500 focus:outline-none 
@@ -52,9 +69,9 @@ const Create = () => {
           <input
            onChange={handlechange}
             type="text"
-            name="ProductPrice"
+            name="productprice"
             id="ProductPrice"
-            value={store.ProductPrice}
+            value={store.productprice}
             placeholder="Enter product price"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg 
                  focus:ring-2 focus:ring-blue-500 focus:outline-none 
@@ -70,10 +87,10 @@ const Create = () => {
             Product Description
           </label>
           <textarea
-            name="desc"
+            name="productdesc"
              onChange={handlechange}
             id="desc"
-            value={store.desc}
+            value={store.productdesc}
             placeholder="Enter product description"
             rows="3"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg 
@@ -92,9 +109,9 @@ const Create = () => {
           <input
             type="text"
              onChange={handlechange}
-            name="Image"
+            name="productimage"
             id="Image"
-            value={store.Image}
+            value={store.productimage}
             placeholder="Enter product image URL"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg 
                  focus:ring-2 focus:ring-blue-500 focus:outline-none 
