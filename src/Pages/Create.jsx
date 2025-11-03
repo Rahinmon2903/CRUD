@@ -4,12 +4,24 @@ const Create = () => {
   const [store, setStore] = useState({
     ProductName: "iphone",
     ProductPrice: "",
-    des: "",
+    desc: "",
     Image: "",
   });
+  const handlechange=(e)=>{
+    const{name,value}=e.target;
+    setStore((prev)=>({
+        ...prev,
+        [name]:value
+  }));
+ 
+  };
+    const handlesubmit = (e) => {
+    e.preventDefault(); 
+ 
+  };
   return (
     <div>
-      <form className="max-w-lg mx-auto bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md space-y-5">
+      <form onSubmit={handlesubmit} className="max-w-lg mx-auto bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md space-y-5">
         <div>
           <label
             htmlFor="ProductName"
@@ -19,6 +31,7 @@ const Create = () => {
           </label>
           <input
             type="text"
+            onChange={handlechange}
             name="ProductName"
             id="ProductName"
             value={store.ProductName}
@@ -37,6 +50,7 @@ const Create = () => {
             Product Price
           </label>
           <input
+           onChange={handlechange}
             type="text"
             name="ProductPrice"
             id="ProductPrice"
@@ -57,6 +71,7 @@ const Create = () => {
           </label>
           <textarea
             name="desc"
+             onChange={handlechange}
             id="desc"
             value={store.desc}
             placeholder="Enter product description"
@@ -76,6 +91,7 @@ const Create = () => {
           </label>
           <input
             type="text"
+             onChange={handlechange}
             name="Image"
             id="Image"
             value={store.Image}
@@ -90,7 +106,7 @@ const Create = () => {
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg shadow-md transition"
         >
-          Save Product
+          Add Product
         </button>
       </form>
     </div>
