@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = ({setProductId}) => {
   const [data, setData] = useState([]);
+  const[delete1,setdelete1]=useState([]);
+   const navigate2=useNavigate();
 
   useEffect(() => {
     fetchdata();
@@ -17,6 +20,14 @@ const Home = () => {
       console.log(error);
     }
   };
+  const Edit =(id)=>{
+    setProductId(id);
+    navigate2(`/Edit/${id}`)
+
+  }
+  const Delete =async(id)=>{
+
+  }
   return (
     <>
       <div className="flex flex-wrap gap-10">
@@ -46,11 +57,13 @@ const Home = () => {
             {/* Action Buttons */}
             <div className="flex gap-3 mt-4">
               <button
+              onClick={()=>Edit(ele.id)}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 Edit
               </button>
               <button
+              onClick={()=>Delete(ele.id)}
                 className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
               >
                 Delete
