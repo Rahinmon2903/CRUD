@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const Home = ({setProductId}) => {
   const [data, setData] = useState([]);
   const[delete1,setdelete1]=useState([]);
@@ -9,7 +10,7 @@ const Home = ({setProductId}) => {
 
   useEffect(() => {
     fetchdata();
-  }, []);
+  }, [delete1]);
   const fetchdata = async () => {
     try {
       const response = await axios.get(
@@ -26,6 +27,15 @@ const Home = ({setProductId}) => {
 
   }
   const Delete =async(id)=>{
+    try {
+        const response= await axios.delete(`https://6904bea06b8dabde4964f28c.mockapi.io/products/${id}`)
+        setdelete1(response.data)
+        
+    } catch (error) {
+        console.log(error);
+        
+        
+    }
 
   }
   return (
