@@ -1,9 +1,27 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const Home = () => {
+    const[data,setData]=useState([])
+
+    useEffect(()=>{
+        fetchdata();
+
+    },[])
+    const fetchdata =async()=>{
+        try {
+            const response= await axios.get()
+            setData(response.data)
+            
+        } catch (error) {
+            console.log(error);
+            
+            
+        }
+    }
     return (
         <div>
-            <h1>home</h1>
+        
             
         </div>
     );
